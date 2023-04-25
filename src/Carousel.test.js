@@ -52,7 +52,7 @@ it("works when you click on the left arrow", function() {
 });
 
 it("hides left arrow on the first image", function() {
-  const { queryByTestId, queryByAltText } = render(<Carousel />);
+  const { queryByTestId, queryByAltText, debug } = render(<Carousel />);
 
   // expect the first image is showing
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
@@ -65,18 +65,23 @@ it("hides left arrow on the first image", function() {
   expect(rightArrow).toBeInTheDocument();
 });
 
-it("hides right arrow on the third image", function() {
-  const { queryByTestId, queryByAltText } = render(<Carousel />);
+it("hides left arrow on the third image", function() {
+  const { queryByTestId, queryByAltText, debug } = render(<Carousel />);
 
-  const rightArrow = queryByTestId("right-arrow");
-  const leftArrow = queryByTestId("left-arrow");
+  // expect the first image is showing
+  expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
+
+  let rightArrow = queryByTestId("right-arrow");
+  let leftArrow = queryByTestId("left-arrow");
 
   fireEvent.click(rightArrow);
   fireEvent.click(rightArrow);
 
-  // expect third image is showing
-  expect(queryByAltText("Photo by Josh Post on Unsplash")).toBeInTheDocument();
-
-  // expect only left arrow is present on third image
+  // reassign rightArrow and LeftArrow from the third image html page
+  rightArrow = queryByTestId("right-arrow");
+  leftArrow = queryByTestId("left-arrow");
+  // expect only right arrow is present when first image shows
   expect(leftArrow).toBeInTheDocument();
+  expect(rightArrow).not.toBeInTheDocument();
 });
+
