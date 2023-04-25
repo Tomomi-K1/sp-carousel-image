@@ -9,6 +9,9 @@ function Carousel(props) {
   const [cardIdx, setCardIdx] = useState(0);
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
+  // springboard solution
+  // const leftIconHidden = cardIdx ===0? "hidden" :"";
+  // const rightIconHidden = cardIdx ===total-1? "hidden" :"";
   const goBackward = () => setCardIdx( cardIdx - 1);
   const goForward = () => setCardIdx(cardIdx + 1);
 
@@ -22,6 +25,13 @@ function Carousel(props) {
           onClick={goBackward}
           data-testid="left-arrow"
         />}
+        {/* springboard solution
+           <i
+          className={`fas fa-chevron-circle-left fa-2x ${leftIconHidden}`}
+          onClick={goBack}
+          data-testid="left-arrow"
+        /> */}
+
         <Card
           caption={card.caption}
           src={card.src}
@@ -34,6 +44,12 @@ function Carousel(props) {
           onClick={goForward}
           data-testid="right-arrow"
         />}
+        {/* springboard solution
+           <i
+          className={`fas fa-chevron-circle-left fa-2x ${rightIconHidden}`}
+          onClick={goBack}
+          data-testid="right-arrow"
+        /> */}
       
       </div>
     </div>
